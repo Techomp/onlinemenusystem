@@ -10,7 +10,7 @@
                 <h1>Create Menu</h1>
                 <hr>
 
-                <form action = "{% url 'menu' %}" method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% if error %}
                         <div class = "alert alert-danger">
@@ -27,7 +27,7 @@
                         <input type="file" class="form-control" name="image" accept="image/*">
                     </div>
                     <div class="text-center">
-                        <input type="submit" value="Login" class = "btn btn-dark">
+                        <input type="submit" value="Create" class = "btn btn-dark">
                     </div>
                 </form>
 

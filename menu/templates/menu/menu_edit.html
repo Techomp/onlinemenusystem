@@ -2,7 +2,20 @@
  {% load static %} 
 
 {% block title %}Menu{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'menu/css/menu.css' %}"/>
+{% endblock css_files %}
+
+
 {% block content %}
+    <div class "row">
+        <div class="col-12 menu-main-image" style="background-image: url({{ menu.image.url }})">
+            <a href="{% url 'menu_details' menu.slug %}" class = "menu-text-link">
+                <h2 class="text-center menu-text display-1" style="color:white;">{{menu.name|title}}</h2>
+        </a>
+        </div>
+    </div>
     <div class = "container mt-3">
         <div class = "row">
             <div class ="col-3"></div>
@@ -10,7 +23,7 @@
                 <h1>Edit Menu</h1>
                 <hr>
 
-                <form action = "{% url 'menu' %}" method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% if error %}
                         <div class = "alert alert-danger">
@@ -19,7 +32,7 @@
                     {% endif %}
                     <div class ="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" value="{{menu.name}}">
                     </div>
 
                     <div class ="mb-3">
@@ -27,12 +40,20 @@
                         <input type="file" class="form-control" name="image" accept="image/*">
                     </div>
                     <div class="text-center">
-                        <input type="submit" value="Login" class = "btn btn-dark">
+                        <input type="submit" value="Edit" class = "btn btn-dark">
                     </div>
                 </form>
 
             </div>
         </div>
 
+    </div>
+
+    <div class="container mt-3">
+        {% for category in categories %}
+            <a href="{% url 'category_edit' menu.slug category.slug %}">
+                <h4>{{category.name}}</h4>
+            </a>
+        {% endfor %}
     </div>
 {% endblock %}

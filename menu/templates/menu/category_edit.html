@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'menu/css/menu.css' %}"/>
+{% endblock css_files %}
+
+
+
+{% block content %}
+
+<div class "row">
+    <div class="col-12 menu-main-image" style="background-image: url({{ category.image.url }})">
+        <a href="{% url 'menu_details' category.slug %}" class = "menu-text-link">
+            <h2 class="text-center menu-text display-1" style="color:white;">{{category.name|title}}</h2>
+        </a>
+    </div>
+</div>
+    {% for product in products %}
+        <h3>{{product|title}}</h3>
+    {% endfor %}
+{% endblock %}
