@@ -34,6 +34,17 @@ def menu_details(request, slug):
     }
     return render(request, "menu/menu_details.html", data)
 
+def menu_edit(request, slug):
+    menu = Menu.objects.get(slug=slug)
+    if(menu.account != request.user):
+        return redirect("menu_details", slug=slug)
+    categories = Category.objects.filter(menu = menu)
+    data = {
+        "menu": menu,
+        "categories": categories,
+    }
+    return render(request, "menu/menu_edit.html", data)
+
 
 def category_details(request, slug, category_slug):
     menu = Menu.objects.get(slug=slug)
