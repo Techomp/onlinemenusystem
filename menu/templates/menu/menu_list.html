@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+ {% load static %} <!-- extend olmasına rağmen tekrar load static yazmak gerekiyor -->
+
+{% block title %}Menu{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'menu/css/menu.css' %}"/>
+{% endblock css_files %}
+
+
+{% block content %}
+    {% for menu in menu_list  %}
+        <div class = "container mb-3 mt-3">
+            <div class "row">
+                <a href="{% url 'menu_details' menu.slug %}" class = "menu-text-link">
+                    <div class="col-12 menu-main-image" style="background-image: url({{ menu.image.url }})">
+                        
+                            <h2 class="text-center menu-text display-3" style="color:white;">{{menu.name|title}}</h2>
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

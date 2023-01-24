@@ -1,0 +1,24 @@
+.menu-main-image {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 40vh;
+    padding: 32px 0;
+    position: relative;
+    text-align: center;
+}
+
+
+.menu-text-link{
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.menu-text{
+    font-family: "Times New Roman", Times, serif;
+    
+}
