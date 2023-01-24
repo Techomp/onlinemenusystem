@@ -18,7 +18,6 @@
     </div>
     <div class = "container mt-3">
         <div class = "row">
-            <div class ="col-3"></div>
             <div class = "col-6">
                 <h1>Edit Menu</h1>
                 <hr>
@@ -45,15 +44,36 @@
                 </form>
 
             </div>
+            <div class = "col-2">
+            </div> 
+            <div class = "col-4">
+                <div class = "container mb-3">
+                    <div class = "row">
+                        <form action = "{% url 'category_create' menu.slug %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class ="mb-3">
+                                <label for="name" class="form-label">Kategori ekle:</label>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                            
+                            <div>
+                                <input type="submit" value="Create" class = "btn btn-dark">
+                            </div>
+                        </form>
+            
+                    </div>
+                </div>
+                <div class="container mt-3">
+                    {% for category in categories %}
+                        <a href="{% url 'category_edit' menu.slug category.slug %}" class="edit-text-link">
+                            <h4>{{category.name|title}}</h4>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
 
     </div>
 
-    <div class="container mt-3">
-        {% for category in categories %}
-            <a href="{% url 'category_edit' menu.slug category.slug %}">
-                <h4>{{category.name}}</h4>
-            </a>
-        {% endfor %}
-    </div>
+
 {% endblock %}

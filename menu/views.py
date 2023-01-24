@@ -31,6 +31,7 @@ def menu_create(request):
 
         menu = Menu.objects.create(name = name, image = image, account = request.user)
         menu.save()
+        return redirect("menu")
         
     return render(request, "menu/menu_form.html")
 
@@ -61,17 +62,13 @@ def menu_edit(request, slug):
 
     if request.method == "POST" :
         if "image" in request.FILES:
-            image = request.FILES["image"]
-            menu.image = image
-            if len(request.POST["name"]):
-                name = request.POST["name"]
-                menu.name = name
-            menu.save()
-        elif "name" in request.POST:
-            name = request.POST["name"]
+            menu.image = request.FILES["image"]
+
+        name = request.POST["name"]
+        if len(name) > 4:
             menu.name = name
-            menu.save()
-              
+        
+        menu.save()     
         return redirect("menu_edit", slug=menu.slug)
 
     categories = Category.objects.filter(menu = menu)
@@ -80,21 +77,6 @@ def menu_edit(request, slug):
         "categories": categories,
     }
     return render(request, "menu/menu_edit.html", data)
-
-
-def category_edit(request, slug, category_slug):
-    menu = Menu.objects.get(slug=slug)
-    if(menu.account != request.user):
-        return redirect("category_details", slug=slug, category_slug=category_slug)
-    category = Category.objects.get(slug=category_slug)
-    products = Product.objects.filter(category=category)
-
-    data = {
-        "menu":menu,
-        "category":category,
-        "products":products
-    }
-    return render(request, "menu/category_edit.html", data)
 
 
 def category_details(request, slug, category_slug):
@@ -110,3 +92,100 @@ def category_details(request, slug, category_slug):
         "products":products
     }
     return render(request, "menu/category_details.html", data)
+
+
+def category_create(request, slug):
+    menu = Menu.objects.get(slug=slug)
+    if(menu.account != request.user):
+        return redirect("menu_details", slug=slug)
+    
+    if request.method == "POST":
+        name = request.POST["name"]
+        if(len(name) > 4):
+            category = Category.objects.create(name=name, menu=menu)
+            category.save()
+    
+    return redirect("menu_edit", slug=slug)
+
+
+def category_edit(request, slug, category_slug):
+    menu = Menu.objects.get(slug=slug)
+    if(menu.account != request.user):
+        return redirect("category_details", slug=slug, category_slug=category_slug)
+    category = Category.objects.get(slug=category_slug)
+    products = Product.objects.filter(category=category)
+
+    if request.method == "POST":
+        name = request.POST["name"]
+        if(len(name) > 4):
+            category.name = name
+        if "image" in request.FILES:
+            category.image = request.FILES["image"]
+
+        category.save()
+        return redirect("category_edit", slug=slug, category_slug=category_slug)
+
+    data = {
+        "menu":menu,
+        "category":category,
+        "products":products
+    }
+    return render(request, "menu/category_edit.html", data)
+
+def product_create(request, slug, category_slug):
+    
+    menu = Menu.objects.get(slug=slug)
+    if(menu.account != request.user):
+        return redirect("category_details", slug=slug, category_slug=category_slug)
+
+    category = Category.objects.get(slug=category_slug)
+
+    if(category.menu != menu):
+        return redirect("menu_details", slug=slug)
+
+    if request.method == "POST":
+        name = request.POST["name"]
+        if(len(name) > 4):
+            product = Product.objects.create(name=name, category=category)
+            product.save()
+    
+    return redirect("category_edit", slug= slug, category_slug = category_slug)
+    
+def product_edit(request, slug, category_slug, product_slug):
+    menu = Menu.objects.get(slug=slug)
+
+    if(menu.account != request.user):
+        return redirect("category_details", slug=slug, category_slug=category_slug)
+
+    category = Category.objects.get(slug=category_slug)
+    product = Product.objects.get(slug=product_slug)
+    if(category.menu != menu or product.category != category):
+        return redirect("menu_details", slug=slug)
+    
+    if request.method == "POST":
+        name = request.POST["name"]
+        description = request.POST["description"]
+        price = request.POST["price"]
+
+        if "image" in request.FILES:
+            image = request.FILES["image"]
+            product.image = image
+
+        if(len(name) > 4):
+            product.name = name
+
+        if(len(description) > 4):
+            product.description = description
+
+        if(float(price) > 0):
+            product.price = float(price)
+
+        product.save()
+        return redirect("product_edit", slug=slug, category_slug = category_slug, product_slug= product_slug)
+
+    data = {
+        "menu":menu,
+        "category": category,
+        "product": product
+    }
+    return render(request, "menu/product_edit.html", data)

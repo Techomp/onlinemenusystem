@@ -11,13 +11,12 @@
 {% block content %}
 <div class "row">
     <div class="col-12 menu-main-image" style="background-image: url({{ menu.image.url }})">
-        <a href="{% url 'menu_details' menu.slug %}" class = "menu-text-link">
-            <h2 class="text-center menu-text display-1" style="color:white;">{{menu.name|title}}</h2>
-    </a>
+        <h2 class="text-center menu-text display-1" style="color:white;">{{menu.name|title}}</h2>
     </div>
 </div>
     <h2> {{ menu.id }} </h2>
     <h2> {{ menu.name|title }}</h2>
+
     {% for category in categories %}
         <a href="{% url 'category_details' menu.slug category.slug %}">{{category.name}}</a>
     {% endfor %}
