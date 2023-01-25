@@ -9,7 +9,7 @@
 
     <div class "row">
         <div class="col-12 menu-main-image" style="background-image: url({{ category.image.url }})">
-            <h2 class="text-center menu-text display-1  ">{{category.name|title}}</h2>
+            <h2 class="text-center menu-text display-1">{{category.name|title}}</h2>
             {% if user.is_authenticated and menu.account == user %}
                 <a href="{% url 'category_edit' menu.slug category.slug  %}">                             
                     <div>

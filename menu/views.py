@@ -123,7 +123,7 @@ def category_edit(request, slug, category_slug):
             category.image = request.FILES["image"]
 
         category.save()
-        return redirect("category_edit", slug=slug, category_slug=category_slug)
+        return redirect("category_edit", slug=slug, category_slug=category.slug)
 
     data = {
         "menu":menu,
