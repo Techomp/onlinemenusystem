@@ -9,7 +9,7 @@
 {% block content %}
     <div class "row">
         <div class="col-12 menu-main-image" style="background-image: url({{ product.image.url }})">
-            <h2 class="text-center menu-text display-1" style="color:white;">{{product.name|title}}</h2>
+            <h2 class="text-center menu-text display-1">{{product.name|title}}</h2>
         </div>
     </div>
 
@@ -18,7 +18,7 @@
             <div class = "col-3">
             </div>
             <div class = "col-6">
-                <h1>Edit Product</h1>
+                <h1 class = "edit-text-style">Edit Product</h1>
                 <hr>
     
                 <form method="POST" enctype="multipart/form-data">
@@ -29,23 +29,23 @@
                         </div>
                     {% endif %}
                     <div class ="mb-3">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label edit-text-style">Name</label>
                         <input type="text" class="form-control" name="name" value="{{product.name}}">
                     </div>
 
                     <div class ="mb-3">
-                        <label for="description" class="form-label">Description</label>
+                        <label for="description" class="form-label edit-text-style">Description</label>
                         <input type="text" class="form-control" name="description" value="{{product.description}}">
                     </div>
 
                     <div class ="mb-3">
-                        <label for="price" class="form-label">Price</label>
+                        <label for="price" class="form-label edit-text-style">Price</label>
                         <input type="number" class="form-control" name="price" value="{{product.price}}" min= 0 step=0.01 inputmode="numeric">
                     </div>
 
                         
                     <div class ="mb-3">
-                        <label for="image" class="form-label">Image</label>
+                        <label for="image" class="form-label edit-text-style">Image</label>
                         <input type="file" class="form-control" name="image" accept="image/*">
                     </div>
 

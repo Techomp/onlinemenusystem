@@ -1,11 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'menu/css/menu.css' %}"/>
+{% endblock css_files %}
 
 {% block content %}
 
-    <h2>{{category.name|title}}</h2>
+    <div class "row">
+        <div class="col-12 menu-main-image" style="background-image: url({{ category.image.url }})">
+            <h2 class="text-center menu-text display-1  ">{{category.name|title}}</h2>
+            {% if user.is_authenticated and menu.account == user %}
+                <a href="{% url 'category_edit' menu.slug category.slug  %}">                             
+                    <div>
+                        <input type="button" value="Edit" class = "btn btn-dark">
+                    </div>
+                </a>
+            {% endif %}
+
+        </div>
+    </div> 
+    <div class = "container mt-3">
     {% for product in products %}
-        <h3>{{product|title}}</h3>
+        {% include "menu/components/product.html" %}
     {% endfor %}
+    </div>
 {% endblock %}

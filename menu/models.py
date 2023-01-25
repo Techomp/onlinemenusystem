@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Menu(models.Model):
     name = models.CharField(max_length=200, unique=True)
     image = models.ImageField(upload_to="menus")
+    background_image = models.ImageField(upload_to="menus_backgrounds", default=("menus_backgrounds/default.jpg"))
     slug = models.SlugField(null=False ,unique=True, db_index=True, editable=False)
     account = models.ForeignKey(User, on_delete=models.CASCADE)
 

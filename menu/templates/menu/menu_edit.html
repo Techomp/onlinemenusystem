@@ -11,15 +11,13 @@
 {% block content %}
     <div class "row">
         <div class="col-12 menu-main-image" style="background-image: url({{ menu.image.url }})">
-            <a href="{% url 'menu_details' menu.slug %}" class = "menu-text-link">
-                <h2 class="text-center menu-text display-1" style="color:white;">{{menu.name|title}}</h2>
-        </a>
+            <h2 class="text-center menu-text display-1">{{menu.name|title}}</h2>
         </div>
     </div>
     <div class = "container mt-3">
         <div class = "row">
             <div class = "col-6">
-                <h1>Edit Menu</h1>
+                <h1 class="edit-text-style">Edit Menu</h1>
                 <hr>
 
                 <form method="POST" enctype="multipart/form-data">
@@ -30,12 +28,12 @@
                         </div>
                     {% endif %}
                     <div class ="mb-3">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label edit-text-style">Name</label>
                         <input type="text" class="form-control" name="name" value="{{menu.name}}">
                     </div>
 
                     <div class ="mb-3">
-                        <label for="image" class="form-label">Image</label>
+                        <label for="image" class="form-label edit-text-style">Image</label>
                         <input type="file" class="form-control" name="image" accept="image/*">
                     </div>
                     <div class="text-center">
@@ -52,7 +50,7 @@
                         <form action = "{% url 'category_create' menu.slug %}" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class ="mb-3">
-                                <label for="name" class="form-label">Kategori ekle:</label>
+                                <label for="name" class="form-label edit-text-style">Kategori ekle:</label>
                                 <input type="text" class="form-control" name="name">
                             </div>
                             

@@ -81,7 +81,7 @@ def menu_edit(request, slug):
 
 def category_details(request, slug, category_slug):
     menu = Menu.objects.get(slug=slug)
-    category = Category.objects.get(slug=category_slug)
+    category = Category.objects.get(slug=category_slug, menu=menu)
     if(category.menu != menu):
         return redirect("menu_details", slug = slug)
     products = Product.objects.filter(category=category)
@@ -112,7 +112,7 @@ def category_edit(request, slug, category_slug):
     menu = Menu.objects.get(slug=slug)
     if(menu.account != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
-    category = Category.objects.get(slug=category_slug)
+    category = Category.objects.get(slug=category_slug, menu=menu)
     products = Product.objects.filter(category=category)
 
     if request.method == "POST":
@@ -138,7 +138,7 @@ def product_create(request, slug, category_slug):
     if(menu.account != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
 
-    category = Category.objects.get(slug=category_slug)
+    category = Category.objects.get(slug=category_slug, menu=menu)
 
     if(category.menu != menu):
         return redirect("menu_details", slug=slug)
@@ -157,7 +157,7 @@ def product_edit(request, slug, category_slug, product_slug):
     if(menu.account != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
 
-    category = Category.objects.get(slug=category_slug)
+    category = Category.objects.get(slug=category_slug, menu = menu)
     product = Product.objects.get(slug=product_slug)
     if(category.menu != menu or product.category != category):
         return redirect("menu_details", slug=slug)

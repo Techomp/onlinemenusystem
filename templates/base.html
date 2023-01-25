@@ -11,7 +11,9 @@
     {% block css_files %} {% endblock %}
     <title>{% block title %} {% endblock %} | Digital Menu</title>
 </head>
-<body>
+<body {% if  menu %}
+    style="background-image: url({{menu.background_image.url}})"
+{% endif %}>
     
     {% include "partials/_navbar.html" %}
 

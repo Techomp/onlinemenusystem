@@ -9,18 +9,35 @@
 {% block title %}{{menu.name}}{% endblock %}
 
 {% block content %}
-<div class "row">
-    <div class="col-12 menu-main-image" style="background-image: url({{ menu.image.url }})">
-        <h2 class="text-center menu-text display-1" style="color:white;">{{menu.name|title}}</h2>
-    </div>
+<div>
+    <div class "row">
+        <div class="col-12 menu-main-image" style="background-image: url({{ menu.image.url }})">
+            <h2 class="text-center menu-text display-1  ">{{menu.name|title}}</h2>
+            {% if user.is_authenticated and menu.account == user %}
+                <a href="{% url 'menu_edit' menu.slug  %}">                             
+                    <div>
+                        <input type="button" value="Edit" class = "btn btn-dark">
+                    </div>
+                </a>
+            {% endif %}
+
+        </div>
+    </div> 
+    <div class = "container mt-4">
+        <div class = "row row-cols-2">
+            {% for category in categories %}
+            
+                    <div class = "col">
+                        <a href="{% url 'category_details' menu.slug category.slug %}" class = "menu-text-link">
+                            <div class="category-image mb-4" style="background-image: url({{ category.image.url }})">
+                                    <h2 class="text-center menu-text display-1">{{category.name|title}}</h2>
+                            </div>
+                        </a>
+                    </div>
+            {% endfor %}
+        </div>               
+    </div>   
 </div>
-    <h2> {{ menu.id }} </h2>
-    <h2> {{ menu.name|title }}</h2>
-
-    {% for category in categories %}
-        <a href="{% url 'category_details' menu.slug category.slug %}">{{category.name}}</a>
-    {% endfor %}
-
 
 {% endblock %}
 
