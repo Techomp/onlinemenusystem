@@ -80,7 +80,7 @@
 
 @media screen and (max-width: 550px) {
     .product-text {
-        font-size: 2.5vw;
+        font-size: 3.5vw;
     }
 }
 
@@ -107,7 +107,7 @@
 
 @media screen and (max-width: 550px) {
     .product-description-text {
-        font-size: 2vw;
+        font-size: 2.5vw;
     }
 }
 
