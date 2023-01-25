@@ -104,3 +104,16 @@
         font-size: 2vw;
     }
 }
+
+
+
+.item-image {
+    aspect-ratio: 1/1;
+    border-radius: var(--dm-rounded-s);
+    flex-shrink: 0;
+    margin-right: 8px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    overflow: hidden;
+    width: 60px;
+  }
