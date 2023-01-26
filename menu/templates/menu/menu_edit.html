@@ -63,9 +63,17 @@
                 </div>
                 <div class="container mt-3">
                     {% for category in categories %}
+                    <div class = "delete-alignment mt-3">
                         <a href="{% url 'category_edit' menu.slug category.slug %}" class="edit-text-link">
                             <h4>{{category.name|title}}</h4>
                         </a>
+                        <div>
+                            <form action = "{% url 'category_delete' menu.slug category.slug %}" method="GET">
+                                {% csrf_token %}
+                                    <input type="submit" value="Sil" class = "btn btn-dark">
+                            </form>
+                        </div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>

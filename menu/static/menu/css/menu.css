@@ -123,3 +123,10 @@
     overflow: hidden;
     width: 60px;
   }
+
+
+  .delete-alignment{
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+  }

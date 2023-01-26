@@ -132,6 +132,21 @@ def category_edit(request, slug, category_slug):
     }
     return render(request, "menu/category_edit.html", data)
 
+def category_delete(request, slug, category_slug):
+    menu = Menu.objects.get(slug=slug)
+    if(menu.account != request.user):
+        return redirect("category_details", slug=slug, category_slug=category_slug)
+    try:
+        category = Category.objects.get(slug=category_slug, menu=menu)
+    except:
+        return redirect(request, "menu_edit", slug=slug)
+
+    category.delete()
+
+    return redirect("menu_edit", slug=slug)
+    
+
+
 def product_create(request, slug, category_slug):
     
     menu = Menu.objects.get(slug=slug)
