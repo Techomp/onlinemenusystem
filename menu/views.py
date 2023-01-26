@@ -204,3 +204,21 @@ def product_edit(request, slug, category_slug, product_slug):
         "product": product
     }
     return render(request, "menu/product_edit.html", data)
+
+
+
+def product_delete(request, slug, category_slug, product_slug):
+    
+    menu = Menu.objects.get(slug=slug)
+    if(menu.account != request.user):
+        return redirect("category_details", slug=slug, category_slug=category_slug)
+
+    category = Category.objects.get(slug=category_slug, menu=menu)
+
+    if(category.menu != menu):
+        return redirect("menu_details", slug=slug)
+
+    product = Product.objects.get(slug=product_slug, category = category)
+    product.delete()
+
+    return redirect("category_edit", slug =slug, category_slug=category_slug)  

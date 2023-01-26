@@ -11,5 +11,6 @@ urlpatterns= [
     path("<slug:slug>/<slug:category_slug>/delete/", views.category_delete, name = "category_delete"),
     path("<slug:slug>/<slug:category_slug>/", views.category_details, name = "category_details"),
     path("<slug:slug>/<slug:category_slug>/product/create", views.product_create, name = "product_create"),
-    path("<slug:slug>/<slug:category_slug>/<slug:product_slug>/edit", views.product_edit, name = "product_edit")
+    path("<slug:slug>/<slug:category_slug>/<slug:product_slug>/edit", views.product_edit, name = "product_edit"),
+    path("<slug:slug>/<slug:category_slug>/<slug:product_slug>/delete", views.product_delete, name = "product_delete"),
 ]

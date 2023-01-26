@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{% static 'menu/css/menu.css' %}"/>
 {% endblock %}
 
-{% block title %}{{menu.name}}{% endblock %}
+{% block title %}{{menu.name|title}}{% endblock %}
 
 {% block content %}
 <div>

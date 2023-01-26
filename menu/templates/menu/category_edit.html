@@ -9,68 +9,72 @@
 
 {% block content %}
 
-<div class "row">
-    <div class="col-12 menu-main-image" style="background-image: url({{ category.image.url }})">
-        <h2 class="text-center menu-text display-1">{{category.name|title}}</h2>
+    <div class "row">
+        <div class="col-12 menu-main-image" style="background-image: url({{ category.image.url }})">
+            <h2 class="text-center menu-text display-1">{{category.name|title}}</h2>
+        </div>
     </div>
-</div>
 
-<div class = "container mt-3">
-    <div class = "row">
-        <div class = "col-6">
-            <h1 class = "edit-text-style">Edit Category</h1>
-            <hr>
+    <div class = "container mt-3">
+        <div class = "row">
+            <div class = "col-6">
+                <h1 class = "edit-text-style">Edit Category</h1>
+                <hr>
 
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% if error %}
-                    <div class = "alert alert-danger">
-                        {{error}}
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class ="mb-3">
+                        <label for="name" class="form-label edit-text-style">Name</label>
+                        <input type="text" class="form-control" name="name" value="{{category.name}}">
                     </div>
-                {% endif %}
-                <div class ="mb-3">
-                    <label for="name" class="form-label edit-text-style">Name</label>
-                    <input type="text" class="form-control" name="name" value="{{category.name}}">
-                </div>
 
-                <div class ="mb-3">
-                    <label for="image" class="form-label edit-text-style">Image</label>
-                    <input type="file" class="form-control" name="image" accept="image/*">
-                </div>
-                <div class="text-center">
-                    <input type="submit" value="Edit" class = "btn btn-dark">
-                </div>
-            </form>
+                    <div class ="mb-3">
+                        <label for="image" class="form-label edit-text-style">Image</label>
+                        <input type="file" class="form-control" name="image" accept="image/*">
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" value="Edit" class = "btn btn-dark">
+                    </div>
+                </form>
 
-        </div>
-        <div class = "col-2">
-        </div> 
-        <div class = "col-4">
-            <div class = "container mb-3">
-                <div class = "row">
-                    <form action = "{% url 'product_create' menu.slug category.slug %}" method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class ="mb-3">
-                            <label for="name" class="form-label edit-text-style">Ürün ekle:</label>
-                            <input type="text" class="form-control" name="name">
-                        </div>
-                        
-                        <div>
-                            <input type="submit" value="Create" class = "btn btn-dark">
-                        </div>
-                    </form>
-        
-                </div>
             </div>
+            <div class = "col-2">
+            </div> 
+            <div class = "col-4">
+                <div class = "container mb-3">
+                    <div class = "row">
+                        <form action = "{% url 'product_create' menu.slug category.slug %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class ="mb-3">
+                                <label for="name" class="form-label edit-text-style">Ürün ekle:</label>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                            
+                            <div>
+                                <input type="submit" value="Create" class = "btn btn-dark">
+                            </div>
+                        </form>
             
-            <div class="container mt-3">
-            {% for product in products %}
-                <a href = "{% url 'product_edit' menu.slug category.slug product.slug %}" class="edit-text-link">
-                    <h4 class="h3">{{product|title}}</h4>
-                </a>
-            {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="container mt-3">
+                {% for product in products %}
+                <div class = "delete-alignment mt-3">
+                    <a href = "{% url 'product_edit' menu.slug category.slug product.slug %}" class="edit-text-link">
+                        <h4 class="h3">{{product|title}}</h4>
+                    </a>
+                    <div>
+                        <form action = "{% url 'product_delete' menu.slug category.slug product.slug %}" method="GET">
+                            {% csrf_token %}
+                                <input type="submit" value="Sil" class = "btn btn-dark">
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 {% endblock %}
