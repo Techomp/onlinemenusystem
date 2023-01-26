@@ -2,11 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Menu, Category, Product
 
 
-
 def menu_list(request):
     if not request.user.is_authenticated:
         return redirect("login")
-    menu_list = Menu.objects.filter(account = request.user)
+    menu_list = Menu.objects.filter(user = request.user)
     data = {
         "menu_list": menu_list
     }
@@ -29,7 +28,7 @@ def menu_create(request):
             })
         image = request.FILES["image"]
 
-        menu = Menu.objects.create(name = name, image = image, account = request.user)
+        menu = Menu.objects.create(name = name, image = image, user = request.user)
         menu.save()
         return redirect("menu")
         
@@ -41,6 +40,10 @@ def menu_details(request, slug):
         menu = Menu.objects.get(slug=slug)
     except:
         return redirect("home")
+
+    if not menu.user.account.has_paid():
+        return redirect("home")
+
     categories = Category.objects.filter(menu = menu)
     data = {
         "menu": menu,
@@ -57,7 +60,7 @@ def menu_edit(request, slug):
     except:
         return redirect("menu")
 
-    if(menu.account != request.user):
+    if(menu.user != request.user):
         return redirect("menu_details", slug=slug)
 
     if request.method == "POST" :
@@ -96,7 +99,7 @@ def category_details(request, slug, category_slug):
 
 def category_create(request, slug):
     menu = Menu.objects.get(slug=slug)
-    if(menu.account != request.user):
+    if(menu.user != request.user):
         return redirect("menu_details", slug=slug)
     
     if request.method == "POST":
@@ -110,7 +113,7 @@ def category_create(request, slug):
 
 def category_edit(request, slug, category_slug):
     menu = Menu.objects.get(slug=slug)
-    if(menu.account != request.user):
+    if(menu.user != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
     category = Category.objects.get(slug=category_slug, menu=menu)
     products = Product.objects.filter(category=category)
@@ -134,7 +137,7 @@ def category_edit(request, slug, category_slug):
 
 def category_delete(request, slug, category_slug):
     menu = Menu.objects.get(slug=slug)
-    if(menu.account != request.user):
+    if(menu.user != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
     try:
         category = Category.objects.get(slug=category_slug, menu=menu)
@@ -150,7 +153,7 @@ def category_delete(request, slug, category_slug):
 def product_create(request, slug, category_slug):
     
     menu = Menu.objects.get(slug=slug)
-    if(menu.account != request.user):
+    if(menu.user != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
 
     category = Category.objects.get(slug=category_slug, menu=menu)
@@ -169,7 +172,7 @@ def product_create(request, slug, category_slug):
 def product_edit(request, slug, category_slug, product_slug):
     menu = Menu.objects.get(slug=slug)
 
-    if(menu.account != request.user):
+    if(menu.user != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
 
     category = Category.objects.get(slug=category_slug, menu = menu)
@@ -210,7 +213,7 @@ def product_edit(request, slug, category_slug, product_slug):
 def product_delete(request, slug, category_slug, product_slug):
     
     menu = Menu.objects.get(slug=slug)
-    if(menu.account != request.user):
+    if(menu.user != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
 
     category = Category.objects.get(slug=category_slug, menu=menu)

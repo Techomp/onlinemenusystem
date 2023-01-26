@@ -7,7 +7,7 @@ class Menu(models.Model):
     image = models.ImageField(upload_to="menus")
     background_image = models.ImageField(upload_to="menus_backgrounds", default=("menus_backgrounds/default.jpg"))
     slug = models.SlugField(null=False ,unique=True, db_index=True, editable=False)
-    account = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.name}"

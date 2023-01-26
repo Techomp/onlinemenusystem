@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Account
 
 def login_request(request):
     if request.user.is_authenticated:
@@ -54,6 +55,8 @@ def register_request(request):
                 else:
                     user = User.objects.create_user(username=username, email=email, first_name=firstname, last_name=lastname, password=password)
                     user.save()
+                    account = Account.objects.create(user = user)
+                    account.save()
                     return redirect("login")
 
         else:
