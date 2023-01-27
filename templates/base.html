@@ -13,6 +13,9 @@
 </head>
 <body {% if  menu %}
     style="background-image: url({{menu.background_image.url}}); background-size:cover; background-position: center"
+
+    {% else %}
+    style="background-image: url('/images/default.jpg'); background-size:cover; background-position: center"
 {% endif %}>
     
     {% include "partials/_navbar.html" %}

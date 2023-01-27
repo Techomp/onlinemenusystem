@@ -1,3 +1,14 @@
+.menu-list-image {
+    min-height: 90vh;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px;
+}
+
 .menu-main-image {
     background-position: 50%;
     background-repeat: no-repeat;
@@ -10,7 +21,6 @@
     position: relative;
     text-align: center;
 }
-
 
 .menu-text-link{
     color: inherit;

@@ -84,6 +84,9 @@ def menu_edit(request, slug):
 
 def category_details(request, slug, category_slug):
     menu = Menu.objects.get(slug=slug)
+
+    if not menu.user.account.has_paid():
+        return redirect("home")
     category = Category.objects.get(slug=category_slug, menu=menu)
     if(category.menu != menu):
         return redirect("menu_details", slug = slug)

@@ -13,7 +13,7 @@
     <div class "row">
         <div class="col-12 menu-main-image" style="background-image: url({{ menu.image.url }})">
             <h2 class="text-center menu-text display-1  ">{{menu.name|title}}</h2>
-            {% if user.is_authenticated and menu.account == user %}
+            {% if user.is_authenticated and menu.user == user %}
                 <a href="{% url 'menu_edit' menu.slug  %}">                             
                     <div>
                         <input type="button" value="Edit" class = "btn btn-dark">
