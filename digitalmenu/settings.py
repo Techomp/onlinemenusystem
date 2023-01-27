@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -80,12 +81,8 @@ WSGI_APPLICATION = 'digitalmenu.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'menutech', 
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost', 
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -129,6 +126,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = "/images/"
