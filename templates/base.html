@@ -11,12 +11,15 @@
     {% block css_files %} {% endblock %}
     <title>{% block title %} {% endblock %} | Digital Menu</title>
 </head>
-<body {% if  menu %}
+<body 
+{% comment %} {% if  menu %}
     style="background-image: url({{menu.background_image.url}}); background-size:cover; background-position: center"
 
     {% else %}
     style="background-image: url('/images/default.jpg'); background-size:cover; background-position: center"
-{% endif %}>
+{% endif %} {% endcomment %}
+ style = "background-color: #212529"
+>
     
     {% include "partials/_navbar.html" %}
 
