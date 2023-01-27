@@ -58,7 +58,10 @@ def menu_edit(request, slug):
     try:
         menu = Menu.objects.get(slug=slug)
     except:
-        return redirect("menu")
+        return redirect("home")
+
+    if not menu.user.account.has_paid():
+        return redirect("home")
 
     if(menu.user != request.user):
         return redirect("menu_details", slug=slug)
@@ -83,11 +86,20 @@ def menu_edit(request, slug):
 
 
 def category_details(request, slug, category_slug):
-    menu = Menu.objects.get(slug=slug)
+
+    try:
+        menu = Menu.objects.get(slug=slug)
+    except:
+        return redirect("home")
 
     if not menu.user.account.has_paid():
         return redirect("home")
-    category = Category.objects.get(slug=category_slug, menu=menu)
+
+    try:
+        category = Category.objects.get(slug=category_slug, menu=menu)
+    except:
+        return redirect("menu_details", slug=slug)
+
     if(category.menu != menu):
         return redirect("menu_details", slug = slug)
     products = Product.objects.filter(category=category)
@@ -101,7 +113,16 @@ def category_details(request, slug, category_slug):
 
 
 def category_create(request, slug):
-    menu = Menu.objects.get(slug=slug)
+
+    try:
+        menu = Menu.objects.get(slug=slug)
+    except:
+        return redirect("home")
+
+    if not menu.user.account.has_paid():
+        return redirect("home")
+
+
     if(menu.user != request.user):
         return redirect("menu_details", slug=slug)
     
@@ -115,10 +136,23 @@ def category_create(request, slug):
 
 
 def category_edit(request, slug, category_slug):
-    menu = Menu.objects.get(slug=slug)
+
+    try:
+        menu = Menu.objects.get(slug=slug)
+    except:
+        return redirect("home")
+
+    if not menu.user.account.has_paid():
+        return redirect("home")
+
     if(menu.user != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
-    category = Category.objects.get(slug=category_slug, menu=menu)
+
+    try:
+        category = Category.objects.get(slug=category_slug, menu=menu)
+    except:
+        return redirect("menu_edit", slug=slug)
+
     products = Product.objects.filter(category=category)
 
     if request.method == "POST":
@@ -139,13 +173,20 @@ def category_edit(request, slug, category_slug):
     return render(request, "menu/category_edit.html", data)
 
 def category_delete(request, slug, category_slug):
-    menu = Menu.objects.get(slug=slug)
+
+    try:
+        menu = Menu.objects.get(slug=slug)
+    except:
+        return redirect("home")
+
+    if not menu.user.account.has_paid():
+        return redirect("home")
     if(menu.user != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
     try:
         category = Category.objects.get(slug=category_slug, menu=menu)
     except:
-        return redirect(request, "menu_edit", slug=slug)
+        return redirect("menu_edit", slug=slug)
 
     category.delete()
 
@@ -155,11 +196,19 @@ def category_delete(request, slug, category_slug):
 
 def product_create(request, slug, category_slug):
     
-    menu = Menu.objects.get(slug=slug)
+    try:
+        menu = Menu.objects.get(slug=slug)
+    except:
+        return redirect("home")
+
+    if not menu.user.account.has_paid():
+        return redirect("home")
     if(menu.user != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
-
-    category = Category.objects.get(slug=category_slug, menu=menu)
+    try:
+        category = Category.objects.get(slug=category_slug, menu=menu)
+    except:
+        return redirect("menu_edit", slug=slug)
 
     if(category.menu != menu):
         return redirect("menu_details", slug=slug)
@@ -173,13 +222,27 @@ def product_create(request, slug, category_slug):
     return redirect("category_edit", slug= slug, category_slug = category_slug)
     
 def product_edit(request, slug, category_slug, product_slug):
-    menu = Menu.objects.get(slug=slug)
+
+    try:
+        menu = Menu.objects.get(slug=slug)
+    except:
+        return redirect("home")
+
+    if not menu.user.account.has_paid():
+        return redirect("home")
 
     if(menu.user != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
 
-    category = Category.objects.get(slug=category_slug, menu = menu)
-    product = Product.objects.get(slug=product_slug)
+    try:
+        category = Category.objects.get(slug=category_slug, menu = menu)
+    except:
+        return redirect("menu_edit", slug=slug)
+
+    try:
+        product = Product.objects.get(slug=product_slug)
+    except:
+        return redirect("category_edit", slug=slug, category_slug=category_slug)
     if(category.menu != menu or product.category != category):
         return redirect("menu_details", slug=slug)
     
@@ -215,16 +278,30 @@ def product_edit(request, slug, category_slug, product_slug):
 
 def product_delete(request, slug, category_slug, product_slug):
     
-    menu = Menu.objects.get(slug=slug)
+    try:
+        menu = Menu.objects.get(slug=slug)
+    except:
+        return redirect("home")
+
+    if not menu.user.account.has_paid():
+        return redirect("home")
+    
     if(menu.user != request.user):
         return redirect("category_details", slug=slug, category_slug=category_slug)
 
-    category = Category.objects.get(slug=category_slug, menu=menu)
+    try:
+        category = Category.objects.get(slug=category_slug, menu=menu)
+    except:
+        return redirect("menu_edit", slug=slug)
 
     if(category.menu != menu):
         return redirect("menu_details", slug=slug)
 
-    product = Product.objects.get(slug=product_slug, category = category)
+    try:
+        product = Product.objects.get(slug=product_slug, category = category)
+    except:
+        return redirect("category_edit", slug =slug, category_slug=category_slug)
+        
     product.delete()
 
     return redirect("category_edit", slug =slug, category_slug=category_slug)  

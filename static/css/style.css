@@ -7,3 +7,9 @@ html, body {
 .text-style {
     color: #C0C0C0
 }
+
+.button-style {
+    /* background-color:#C0C0C0; 
+    color: #212529; */
+    border: 1px solid #C0C0C0;
+}
