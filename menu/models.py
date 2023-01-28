@@ -51,7 +51,7 @@ class Product(models.Model):
     slug = models.SlugField(db_index=True, editable=False, unique=True)
     image = models.ImageField(upload_to="products", null=True)
     description = models.TextField(default="")
-    price = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
+    price = models.DecimalField(max_digits=7, decimal_places=2, default=0.0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):

@@ -71,15 +71,45 @@
     color: #C0C0C0;
 }
 /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 1001px) {
     .product-text {
-      font-size: 2vw;
+      font-size: 1.2vw;
+    }
+
+    .product-description-text {
+        font-size: 1vw;
+    }
+
+    .product-image{
+        width: 60%;
     }
   }
+
+@media screen and (max-width: 1000px) and (min-width:801px) {
+    .product-text {
+        font-size: 2vw;
+    }
+
+    .product-description-text {
+        font-size: 1.5vw;
+    }
+
+    .product-image{
+        width: 80%;
+    }
+}
   
 @media screen and (max-width: 800px) and (min-width:701px) {
     .product-text {
         font-size: 2vw;
+    }
+
+    .product-description-text {
+        font-size: 1.5vw;
+    }
+
+    .product-image{
+        width: 100%;
     }
 }
   /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
@@ -87,42 +117,29 @@
     .product-text {
         font-size: 2.5vw;
     }
+
+    .product-description-text {
+        font-size: 2vw;
+    }
+
+    .product-image{
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 550px) {
     .product-text {
         font-size: 3.5vw;
     }
-}
 
-
-
-@media screen and (min-width: 801px) {
-    .product-description-text {
-      font-size: 1.5vw;
-    }
-  }
-  
-@media screen and (max-width: 800px) and (min-width:701px) {
-    .product-description-text {
-      font-size: 1.5vw;
-    }
-  }
-  
-  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
-@media screen and (max-width: 700px) and ( min-width:551px) {
-    .product-description-text {
-        font-size: 2vw;
-    }
-}
-
-@media screen and (max-width: 550px) {
     .product-description-text {
         font-size: 2.5vw;
     }
+
+    .product-image{
+        width: 100%;
+    }
 }
-
-
 
 .item-image {
     aspect-ratio: 1/1;
