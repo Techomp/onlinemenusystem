@@ -215,7 +215,7 @@ def product_create(request, slug, category_slug):
 
     if request.method == "POST":
         name = request.POST["name"]
-        if(len(name) > 4):
+        if(len(name) > 1):
             product = Product.objects.create(name=name, category=category)
             product.save()
     
