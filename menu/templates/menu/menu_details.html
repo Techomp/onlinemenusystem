@@ -29,7 +29,11 @@
             
                     <div class = "col">
                         <a href="{% url 'category_details' menu.slug category.slug %}" class = "menu-text-link">
-                            <div class="category-image mb-4" style="background-image: url({{ category.image.url }});">
+                            <div class="category-image mb-4" 
+                             {% if category.image %}
+                                style="background-image: url({{ category.image.url }});"
+                             {% endif %}
+                            >
                                     <h2 class="text-center category-text display-1">{{category.name|title}}</h2>
                             </div>
                         </a>

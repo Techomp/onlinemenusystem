@@ -8,7 +8,11 @@
 
 {% block content %}
     <div class "row">
-        <div class="col-12 menu-main-image" style="background-image: url({{ product.image.url }})">
+        <div class="col-12 menu-main-image" 
+            {% if product.image %}
+            style="background-image: url({{ product.image.url }})"
+            {% endif %}
+        >
             <h2 class="text-center menu-text display-1">{{product.name|title}}</h2>
         </div>
     </div>

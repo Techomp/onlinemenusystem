@@ -128,9 +128,11 @@ def category_create(request, slug):
     
     if request.method == "POST":
         name = request.POST["name"]
-        if(len(name) > 4):
+        if(len(name) > 0):
             category = Category.objects.create(name=name, menu=menu)
-            category.save()
+        else:
+            category = Category.objects.create(name="Yeni Kategori", menu=menu)
+        category.save()
     
     return redirect("menu_edit", slug=slug)
 
@@ -215,9 +217,11 @@ def product_create(request, slug, category_slug):
 
     if request.method == "POST":
         name = request.POST["name"]
-        if(len(name) > 1):
+        if(len(name) > 0):
             product = Product.objects.create(name=name, category=category)
-            product.save()
+        else:
+            product = Product.objects.create(name="Yeni Ürün", category=category)
+        product.save()
     
     return redirect("category_edit", slug= slug, category_slug = category_slug)
     

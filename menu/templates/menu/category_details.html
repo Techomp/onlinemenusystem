@@ -8,19 +8,23 @@
 {% block content %}
 
     <div class "row">
-        <div class="col-12 menu-main-image" style="background-image: url({{ category.image.url }})">
+        <div class="col-12 menu-main-image"
+            {% if category.image %}
+            style="background-image: url({{ category.image.url }})"
+            {% endif %}
+        >
             <h2 class="text-center menu-text display-1">{{category.name|title}}</h2>
             {% if user.is_authenticated and menu.user == user %}
                 <a href="{% url 'category_edit' menu.slug category.slug  %}">                             
                     <div>
-                        <input type="button" value="Düzenle" class = "btn btn-dark">
+                        <input type="button" value="Düzenle" class = "btn btn-dark {% if not category.image %}button-style{% endif %}">
                     </div>
                 </a>
             {% endif %}
 
         </div>
     </div> 
-    <div class = "container mt-3">
+    <div class = "container mt-3 mb-3">
     {% for product in products %}
         {% include "menu/components/product.html" %}
     {% endfor %}

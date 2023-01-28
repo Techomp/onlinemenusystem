@@ -10,7 +10,11 @@
 {% block content %}
 
     <div class "row">
-        <div class="col-12 menu-main-image" style="background-image: url({{ category.image.url }})">
+        <div class="col-12 menu-main-image" 
+            {% if category.image %}
+            style="background-image: url({{ category.image.url }})"
+            {% endif %}
+        >
             <h2 class="text-center menu-text display-1">{{category.name|title}}</h2>
         </div>
     </div>
