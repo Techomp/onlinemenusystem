@@ -1,5 +1,5 @@
 """
-WSGI config for digitalmenu project.
+WSGI config for menutech project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'digitalmenu.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'menutech.settings')
 
 application = get_wsgi_application()
