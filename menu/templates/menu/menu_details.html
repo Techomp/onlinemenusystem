@@ -16,7 +16,7 @@
             {% if user.is_authenticated and menu.user == user %}
                 <a href="{% url 'menu_edit' menu.slug  %}">                             
                     <div>
-                        <input type="button" value="Edit" class = "btn btn-dark">
+                        <input type="button" value="Düzenle" class = "btn btn-dark">
                     </div>
                 </a>
             {% endif %}

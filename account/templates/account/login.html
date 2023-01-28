@@ -7,7 +7,7 @@
         <div class = "row">
             <div class ="col-3"></div>
             <div class = "col-6">
-                <h1 class="text-style">Login</h1>
+                <h1 class="text-style">Giriş Yap</h1>
                 <hr>
 
                 <form action = "{% url 'login' %}" method="POST">
@@ -18,16 +18,16 @@
                         </div>
                     {% endif %}
                     <div class ="mb-3">
-                        <label for="username" class="form-label text-style">Username</label>
+                        <label for="username" class="form-label text-style">Kullanıcı Adı</label>
                         <input type="text" class="form-control" name="username">
                     </div>
 
                     <div class ="mb-3">
-                        <label for="password" class="form-label text-style">Password</label>
+                        <label for="password" class="form-label text-style">Parola</label>
                         <input type="password" class="form-control" name="password">
                     </div>
                     <div class="text-center">
-                        <input type="submit" value="Login" class = "btn btn-dark button-style">
+                        <input type="submit" value="Giriş Yap" class = "btn btn-dark button-style">
                     </div>
                 </form>
 

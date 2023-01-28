@@ -7,7 +7,7 @@
         <div class = "row">
             <div class ="col-3"></div>
             <div class = "col-6">
-                <h1 class="text-style">Register</h1>
+                <h1 class="text-style">Kayıt Ol</h1>
                 <hr>
 
                 <form action = "{% url 'register' %}" method="POST">
@@ -18,33 +18,33 @@
                         </div>
                     {% endif %}
                     <div class ="mb-3">
-                        <label for="username" class="form-label text-style">Username</label>
+                        <label for="username" class="form-label text-style">Kullanıcı Adı</label>
                         <input type="text" class="form-control" name="username" value="{{username}}">
                     </div>
 
                     <div class ="mb-3">
-                        <label for="email" class="form-label text-style">Email</label>
+                        <label for="email" class="form-label text-style">E-posta</label>
                         <input type="email" class="form-control" name="email" value="{{email}}">
                     </div>
                     <div class ="mb-3">
-                        <label for="firstname" class="form-label text-style">Firstname</label>
+                        <label for="firstname" class="form-label text-style">İsim</label>
                         <input type="text" class="form-control" name="firstname" value="{{firstname}}">
                     </div>
                     <div class ="mb-3">
-                        <label for="lastname" class="form-label text-style">Lastname</label>
+                        <label for="lastname" class="form-label text-style">Soyisim</label>
                         <input type="text" class="form-control" name="lastname" value="{{lastname}}">
                     </div>
 
                     <div class ="mb-3">
-                        <label for="password" class="form-label text-style">Password</label>
+                        <label for="password" class="form-label text-style">Parola</label>
                         <input type="password" class="form-control" name="password">
                     </div>
                     <div class ="mb-3">
-                        <label for="repassword" class="form-label text-style">Re-password</label>
+                        <label for="repassword" class="form-label text-style">Parola tekrar</label>
                         <input type="password" class="form-control" name="repassword">
                     </div>
                     <div class="text-center">
-                        <input type="submit" value="Register" class = "btn btn-dark button-style">
+                        <input type="submit" value="Kayıt Ol" class = "btn btn-dark button-style">
                     </div>
                 </form>
 

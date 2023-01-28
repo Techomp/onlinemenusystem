@@ -9,7 +9,7 @@
             {% if user.is_authenticated %}
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a href="{% url 'menu' %}" class="nav-link">Menu</a>
+                        <a href="{% url 'menu' %}" class="nav-link">Menüler</a>
                     </li>
                 </ul>
             {% endif %}
@@ -18,7 +18,7 @@
                     
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            <a class="nav-link" href="{% url 'logout' %}">Çıkış Yap</a>
                         </li>
                     {% endif %}
 
@@ -30,7 +30,7 @@
 
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            <a class="nav-link" href="{% url 'logout' %}">Çıkış Yap</a>
                         </li>
 
                         
@@ -38,10 +38,10 @@
                     {% else %}
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            <a class="nav-link" href="{% url 'login' %}">Giriş Yap</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                            <a class="nav-link" href="{% url 'register' %}">Kayıt Ol</a>
                         </li>
                     {% endif %}
 
