@@ -244,9 +244,10 @@ def product_edit(request, slug, category_slug, product_slug):
         return redirect("menu_edit", slug=slug)
 
     try:
-        product = Product.objects.get(slug=product_slug)
+        product = Product.objects.get(slug=product_slug, category=category)
     except:
         return redirect("category_edit", slug=slug, category_slug=category_slug)
+
     if(category.menu != menu or product.category != category):
         return redirect("menu_details", slug=slug)
     
